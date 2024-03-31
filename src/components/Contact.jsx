@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { FaPaperPlane } from 'react-icons/fa';
+import emailjs from 'emailjs-com';
+import dotenv from 'dotenv';
 
 function Contact() {
   const [name, setName] = useState('');
@@ -14,11 +16,13 @@ function Contact() {
     if (!name) {
       validationErrors.name = 'Name is required';
     }
+
     if (!email) {
       validationErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       validationErrors.email = 'Invalid email address';
     }
+
     if (!message) {
       validationErrors.message = 'Message is required';
     }
@@ -26,16 +30,25 @@ function Contact() {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-      console.log('Form submitted successfully');
-      setName('');
-      setEmail('');
-      setMessage('');
-      setErrors({});
+      emailjs.send("service_70b22jc", "template_8v64opr", {
+        from_name: name,
+        from_email: email,
+        message: message,
+      }, "_N7xofEyH7Gbj8q_h")
+        .then((response) => {
+          console.log('Email sent successfully!', response.status, response.text);
+          setName('');
+          setEmail('');
+          setMessage('');
+          setErrors({});
+        }, (error) => {
+          console.error('Error sending email:', error);
+        });
     }
   };
 
   return (
-    <section className="h-screen flex justify-center items-center ">
+    <section className="h-screen flex justify-center items-center">
       <div className="w-full md:w-3/6 w-3/4 p-4 bg-[#2E2E30] rounded-2xl shadow-lg">
         <h2 className="text-4xl font-bold mb-4 text-center text-[#F3FFDB]">Contact Me</h2>
         <form onSubmit={handleSubmit}>

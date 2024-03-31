@@ -6,7 +6,7 @@ import Contact from './components/Contact';
 import Resume from './components/Resume';
 
 
-const sections = ['About', 'Portfolio','Resume', 'Contact'];
+
 
 function App() {
   const [currentSection, setCurrentSection] = useState('About');
@@ -41,9 +41,9 @@ function App() {
         });
       },
       {
-        // Adjust the root margin as needed
+
         rootMargin: '0px',
-        threshold: 0.5, // Trigger when 50% of the element is visible
+        threshold: 0.5,
       }
     );
 

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaUser, FaFolder, FaEnvelope, FaFile, FaCode, FaBars, FaTimes } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLinkedin, faStackOverflow } from '@fortawesome/free-brands-svg-icons';
 
 const sections = [
   { name: 'About', icon: FaUser },
@@ -48,22 +48,29 @@ function Header({ currentSection, setCurrentSection, isOpen, setIsOpen }) {
         </nav>
         <div className="flex flex-col space-y-1 items-center">
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/hyrumsdolan"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-3xl text-[#F3FFDB] hover:text-[#C8E6C9] transition-colors duration-300"
+            className="text-3xl text-[#F3FFDB] hover:text-[#FF7F50] transition-colors duration-300"
           >
             <FontAwesomeIcon icon={faGithub} />
           </a>
           <a
-            href="https://www.linkedin.com/in/yourusername"
+            href="https://www.linkedin.com/in/hyrum-dolan"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-3xl text-[#F3FFDB] hover:text-[#C8E6C9] transition-colors duration-300"
+            className="text-3xl text-[#F3FFDB] hover:text-[#FF7F50] transition-colors duration-300"
           >
             <FontAwesomeIcon icon={faLinkedin} />
           </a>
-          
+          <a
+            href="https://stackoverflow.com/users/23913213/hyrum-dolan"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-3xl text-[#F3FFDB] hover:text-[#FF7F50] transition-colors duration-300"
+          >
+            <FontAwesomeIcon icon={faStackOverflow} />
+          </a>
         </div>
       </header>
     </>
