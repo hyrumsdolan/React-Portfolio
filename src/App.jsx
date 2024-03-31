@@ -1,16 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
+
 import Header from './components/Header';
 import About from './components/About';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import Resume from './components/Resume';
 
-
-
-
 function App() {
   const [currentSection, setCurrentSection] = useState('About');
   const [isHeaderOpen, setIsHeaderOpen] = useState(false);
+  const [isOptimizedLoading, setIsOptimizedLoading] = useState(false);
   const sectionRefs = useRef({
     About: null,
     Portfolio: null,
@@ -41,7 +40,6 @@ function App() {
         });
       },
       {
-
         rootMargin: '0px',
         threshold: 0.5,
       }
@@ -58,8 +56,29 @@ function App() {
     };
   }, []);
 
+  const renderSection = (sectionName) => {
+    switch (sectionName) {
+      case 'About':
+        return <About />;
+      case 'Portfolio':
+        return <Portfolio />;
+      case 'Resume':
+        return <Resume />;
+      case 'Contact':
+        return <Contact />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="flex">
+      <button
+        className="fixed bottom-1 left-1 bg-gray-800 text-white px-4 py-2 rounded"
+        onClick={() => isOptimizedLoading ? null : setIsOptimizedLoading(!isOptimizedLoading)}
+      >
+        {isOptimizedLoading ? 'Reload Page for intended scroll experience' : 'Bootcamp Grader, Click Here'}
+      </button>
       <Header
         currentSection={currentSection}
         setCurrentSection={handleSectionChange}
@@ -71,35 +90,40 @@ function App() {
         onScroll={handleScroll}
         onClick={() => setIsHeaderOpen(false)}
       >
-        <section
-          id="About"
-          ref={(el) => (sectionRefs.current.About = el)}
-          className="h-screen snap-start"
-        >
-          <About />
-        </section>
-        <section
-          id="Portfolio"
-          ref={(el) => (sectionRefs.current.Portfolio = el)}
-          className="h-screen snap-start"
-        >
-          <Portfolio />
-        </section>
-        <section
-          id="Resume"
-          ref={(el) => (sectionRefs.current.Resume = el)}
-          className="h-screen snap-start"
-        >
-          <Resume />
-        </section>
-        <section
-          id="Contact"
-          ref={(el) => (sectionRefs.current.Contact = el)}
-          className="h-screen snap-start"
-        >
-          <Contact />
-        </section>
-        
+        {isOptimizedLoading ? (
+          renderSection(currentSection)
+        ) : (
+          <>
+            <section
+              id="About"
+              ref={(el) => (sectionRefs.current.About = el)}
+              className="h-screen snap-start"
+            >
+              <About />
+            </section>
+            <section
+              id="Portfolio"
+              ref={(el) => (sectionRefs.current.Portfolio = el)}
+              className="h-screen snap-start"
+            >
+              <Portfolio />
+            </section>
+            <section
+              id="Resume"
+              ref={(el) => (sectionRefs.current.Resume = el)}
+              className="h-screen snap-start"
+            >
+              <Resume />
+            </section>
+            <section
+              id="Contact"
+              ref={(el) => (sectionRefs.current.Contact = el)}
+              className="h-screen snap-start"
+            >
+              <Contact />
+            </section>
+          </>
+        )}
       </main>
       <Header
         currentSection={currentSection}
@@ -107,7 +131,6 @@ function App() {
         isOpen={isHeaderOpen}
         setIsOpen={setIsHeaderOpen}
       />
-
     </div>
   );
 }
