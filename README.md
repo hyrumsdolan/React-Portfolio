@@ -9,6 +9,9 @@
 
 This is a developer portfolio application built with React, Tailwind CSS, and Vite. Showcasing my projects, skills, and experiences as a software developer. The portfolio is designed to be responsive and user-friendly, providing a seamless experience on both desktop and mobile devices.
 
+## Deployed
+If still active: https://react-portfolio-24sc.onrender.com
+
 ## Pages
 
 - **About Me**
